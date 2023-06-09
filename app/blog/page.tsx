@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { allBlogs } from 'contentlayer/generated';
-import ViewCounter from './view-counter';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   return (
     <section>
-      <h1 className="font-bold text-3xl font-serif mb-5">Blog</h1>
+      <h1 className="font-bold text-4xl font-serif mb-5">Blog</h1>
       {allBlogs
         .sort((a, b) => {
           if (new Date(a.publishedAt) > new Date(b.publishedAt)) {
@@ -27,7 +26,9 @@ export default async function BlogPage() {
           >
             <div className="w-full flex flex-col">
               <p>{post.title}</p>
-              <ViewCounter slug={post.slug} trackView={false} />
+              <p className="text-neutral-500 dark:text-neutral-400">
+                {post.publishedAt}
+              </p>
             </div>
           </Link>
         ))}
