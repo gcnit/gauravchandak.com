@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     default: 'Gaurav Chandak',
     template: '%s | Gaurav Chandak',
   },
-  description: 'Developer, writer, and creator.',
+  description: 'Developer and Entrepreneur',
   openGraph: {
     title: 'Gaurav Chandak',
-    description: 'Developer, writer, and creator.',
+    description: 'Developer and Entrepreneur',
     url: 'https://gauravchandak.com',
     siteName: 'Gaurav Chandak',
     images: [
@@ -50,10 +50,6 @@ export const metadata: Metadata = {
   },
   icons: {
     shortcut: '/favicon.ico',
-  },
-  verification: {
-    google: 'eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw',
-    yandex: '14d2e73487fa6c71',
   },
 };
 
