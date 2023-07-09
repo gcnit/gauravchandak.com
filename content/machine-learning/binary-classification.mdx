@@ -1,0 +1,142 @@
+---
+title: 'Binary Classification'
+publishedAt: '2023-07-09 00:00:30'
+summary: 'Binary Classification - To be, or not to be: that is the question'
+---
+
+> To be, or not to be: that is the question
+
+Introduction
+------------
+
+Binary Classification as the name suggests is the task of classifying elements into one of two classes/groups. Some applications of binary classification are:
+
+*   Testing if a person has a particular disease or not
+*   Classifying email as spam or not spam
+*   Credit card fraud detection, etc.
+
+It is a form of [supervised learning](/blog/machine-learning/supervised-learning) where
+
+*   Given a set of observations
+*   A model needs to be trained based on those observations
+*   Post which the model should be able to classify new observations into one of the categories.
+
+Methods
+-------
+
+Some of the most commonly used methods for binary classification are:
+
+*   [k-Nearest Neighbour](/blog/machine-learning/k-nearest-neighbors-algorithm-k-nn)
+*   [Naive Bayes](/blog/machine-learning/naive-bayes-classifier)
+*   [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression)
+*   [Decision Trees](https://en.wikipedia.org/wiki/Decision_tree_learning)
+*   [Random Forests](https://en.wikipedia.org/wiki/Random_forests)
+*   [SVMs](https://en.wikipedia.org/wiki/Support_vector_machine)
+*   [Neural Networks](https://en.wikipedia.org/wiki/Neural_network)
+
+None of these are better than the other and it totally depends on the problem/use case and the available data. [Any two optimization algorithms are equivalent when their performance is averaged across all possible problems. There is no free lunch.](https://en.wikipedia.org/wiki/No_free_lunch_theorem) Though it is [recommended](https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms/answer/Xavier-Amatriain) that we should start with something simple and make it more complicated if and only if necessary.
+
+Evaluation
+----------
+
+The simplest and most common evaluation metric for binary classification problem is accuracy.
+
+```
+Accuracy = (# Correct Predictions)/(# Observations)
+```
+
+Though it seems to be a very good metric for evaluation but it may not be desirable for every use case. Say, we are trying to detect if a person has cancer or not. Say, we try to classify 1000 people with having cancer or not and we are able to get 95% accuracy. Though it may seem like a very good model but here is the catch. If most of the samples are negative (no cancer) and the model predicts them as negative, the accuracy will be high even if some of the positive samples are predicted as negative. This is undesirable since we would not want to tell a person with cancer that he does not have cancer but we can ask a person with no cancer to undergo some tests, if required. So, we would want to prefer a model which tries not to predict positive cases as negative, i.e., has a higher recall.
+
+Let’s say that the observations have both **positive (P)** and **negative (N)** samples. The model gives two types of predictions: **predicted positive (P’)** and **predicted negative (N’)**. Based on the predictions, we can create a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix):
+
+![](https://miro.medium.com/v2/resize:fit:1398/0*DwxQAGmL35CcoPSc.png)
+
+Confusion Matrix (Source:MathWorks)
+
+*   [True Positive (TP)](https://en.wikipedia.org/wiki/True_positive) : Positive and Predicted Positive
+*   [True Negative (TN)](https://en.wikipedia.org/wiki/True_negative) : Negative and Predicted Negative
+*   [False Positive (FP)](https://en.wikipedia.org/wiki/False_positive) : Negative and Predicted Positive
+*   [False Negative (FN)](https://en.wikipedia.org/wiki/False_negative) : Positive and Predicted Negative
+
+It can be seen that:
+
+*   P + N = # Observations
+*   TP + TN = True (Correct) Predictions
+*   FP + FN = False (Incorrect) Predictions
+*   TP + FN = P
+*   TN + FP = N
+*   TP + FP = P’
+*   TN + FN = N’
+
+Therefore, [Accuracy (ACC)](https://en.wikipedia.org/wiki/Accuracy) \= (TP + TN)/(P + N)
+
+We can derive 8 more useful metrics based on TP, FP, TN, FN. These are:
+
+*   [Recall/Sensitivity/Hit Rate/True Positive Rate (TPR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TP/P
+*   [Miss Rate/False Negative Rate (FNR)](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors#False_positive_and_false_negative_rates) = FN/P
+*   [Specificity (SPC)/True Negative Rate (TNR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TN/N
+*   [Fall-out/False Positive Rate (FPR)](https://en.wikipedia.org/wiki/False_positive_rate) = FP/N
+*   [Precision/Positive predictive value (PPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TP/P’
+*   [False Discovery Rate (FDR)](https://en.wikipedia.org/wiki/False_discovery_rate) = FP/P’
+*   [Negative predictive value (NPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TN/N’
+*   [False Omission Rate (FOR)](https://en.wikipedia.org/wiki/False_omission_rate) = FN/N’
+
+Further Derivations:
+
+*   [Positive Likelihood ratio (LR+)](https://en.wikipedia.org/wiki/Positive_likelihood_ratio) = TPR/FPR
+*   [Negative Likelihood ratio (LR-)](https://en.wikipedia.org/wiki/Negative_likelihood_ratio) = FNR/TNR
+
+```
+Sample Values:
+
+Actual  Predicted
+1       1
+0       0
+0       1
+1       0
+1       1
+0       0
+0       0
+1       0
+
+Metrics:
+
+P = 4
+N = 4
+P' = 3
+N' = 5
+
+TP = 2
+TN = 3
+FP = 1
+FN = 2
+
+P + N = 8
+TP + TN = 5
+FP + FN = 3
+TP + FN = P = 4
+TN + FP = N = 4
+TP + FP = P’ = 3
+TN + FN = N’ = 5
+ACC = (TP + TN)/(P + N) = 5/8 = 0.625
+
+Recall/TPR = TP/P = 2/4 = 0.5
+FNR = FN/P = 2/4 = 0.5
+TNR = TN/N = 3/4 = 0.75
+FPR = FP/N = 1/4 = 0.25
+Precision/PPV = TP/P’ = 2/3 = 0.67
+FDR = FP/P’ = 1/3 = 0.33
+NPV = TN/N’ = 3/5 = 0.6
+FOR = FN/N’ = 2/5 = 0.4
+
+LR+ = TPR/FPR = 0.5/0.25 = 2
+LR- = FNR/TNR = 0.5/0.75 = 0.67
+```
+
+Another commonly used evaluation metric is [AUC (Area under the curve)/ROC (Receiver operating characteristic) curve score](https://en.wikipedia.org/wiki/Receiver_operating_characteristic).
+
+![](https://miro.medium.com/v2/resize:fit:1000/1*B7DxPNemgpKQowZ1Ztci8w.png)
+
+ROC Curve (Source:Wikipedia)
+
+A ROC space is defined by FPR and TPR as _x_ and _y_ axes, respectively, which depicts relative trade-offs between true positive (benefits) and false positive (costs). The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. AUC is the area under the ROC Curve. A higher AUC score signifies a better model.

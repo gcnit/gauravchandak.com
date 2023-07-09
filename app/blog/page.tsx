@@ -27,7 +27,7 @@ export default async function BlogPage() {
             <div className="w-full flex flex-col">
               <p>{post.title}</p>
               <p className="text-neutral-500 dark:text-neutral-400">
-                {post.publishedAt}
+                {post.publishedAt.split(' ')[0]}
               </p>
             </div>
           </Link>

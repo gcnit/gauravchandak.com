@@ -1,0 +1,38 @@
+---
+title: 'k-nearest neighbors algorithm (k-NN)'
+publishedAt: '2023-07-09 00:01:00'
+summary: 'k-nearest neighbors algorithm (k-NN) - You are the average of the five people you most associate with'
+---
+
+> You are the average of the five people you most associate with
+
+Say, you are a teacher in a very famous school and a new student applies to your school. Since you like predicting stuffs, you want to predict if the applicant will be selected or not. Before the admission process, the school collects a set of attributes about the applicant based on some basic evaluations and also on previous academic and other details. Now since you have been on the admission panel for long, you already have a rough idea about the students that were selected and those who were rejected, you can judge the applicant based on his/her attributes.
+
+One way to do so is by comparing him with all the applicants and then finding the 5 applicants who seem most similar to him based on the attributes. Suppose, 4 out of the 5 were selected and 1 was not. Intuitively, you can say that the new student will be selected. Even if 3 out of 5 are selected, you can assume that he can be selected. So what we are actually doing is taking the [mode](https://en.wikipedia.org/wiki/Mode_(statistics)) of the selection label in the 5 closest applicants and classifying the applicant in it. This algorithm is known as **k-nearest neighbour classification**. The value of k is 5 in our example.
+
+Now say, you want to predict how much that applicant will score in the selection test. One thing you can do is to find the top 5 applicants most similar to him as in previous example and then compute the mean of the scores of these applicants and predicting it as the score of the applicant. This algorithm is known as **k-nearest neighbour regression**. The value of k is 5 in our example.
+
+These algorithms are generically known as the **k-nearest neighbors algorithm.** It is one of the simplest machine learning algorithms.
+
+The similarity between two observations is computed by finding the distance between them using some distance metric (Generally [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance)).
+
+![](https://miro.medium.com/v2/resize:fit:988/1*AsY9lVJwcnL0OaWp-b5DdQ.jpeg)
+
+Eucledian Distance (Source: Imgur)  
+Here, pi is the value of the ith feature in the 1st observation  
+qi is the value of the ith feature in the 2nd observation
+
+When k=1, the algorithm is known as **nearest neighbour algorithm** and the label of the nearest neighbor is assigned to the observation.
+
+The value of _k_ should not be taken too high or too low and should depend on the data. If we keep the value of _k_ too high, then the model won’t be generalized and will return the same value in most of the cases. Say, k=n where _n_ is the number of samples in training set. In this case, all the predictions will be equal to the mode of the training set. In case of small _k_, the model will not be able to filter out outliers.
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*rmdr7RsUPOWranwOuuIl7w.png)
+
+k-NN classifier (Source: [en.proft.com.ua](http://en.proft.com.ua/media/science/r_knn_concept.png))
+
+One drawback of using k-NN is that say if k=7 and first 3 of the nearest neighbors are labelled ‘x’ and the next 4 are labelled ‘y’. Our algorithm will predict ‘y’ even when intuitively, it should have been ‘x’. This issue can be tackled by assigning more weight to the nearest ones and reducing the weight as we go far.
+
+The above problem also happens when the dataset is skewed and the mode will generally belong to the skewed class even if they’re very distant. This can also be solved using weights based on inverse of distance.
+
+k-NN classifier is available in scikit-learn as [**KNeighborsClassifier**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) in **sklearn.neighbors.  
+**k-NN regressor is available in scikit-learn as [**KNeighborsRegressor**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) in **sklearn.neighbors.**
