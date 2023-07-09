@@ -6,8 +6,7 @@ summary: 'Supervised Learning - To predict the future, look to the past'
 
 > To predict the future, look to the past
 
-Classification Problem
-----------------------
+# Classification Problem
 
 Imagine this scenario: You are handed a basket filled with various types of fruits, but you have absolutely no knowledge about fruits. If I were to randomly select a fruit from the basket and ask you to identify it, would you be able to give me the correct answer? Most likely not, unless you resort to using Google Image Search.
 
@@ -15,22 +14,19 @@ Now, let's consider a different situation. I take you to an orchard where you ar
 
 Now, let's shift gears and think about teaching a computer to perform the same task. Obviously, I can't physically take the computer to the orchard to help it understand. Instead, I would provide the computer with a list of fruits from the orchard, along with some specific features such as color, shape, volume, texture, and so on. I would then ask the computer to learn this information using sophisticated algorithms. Once the computer has learned, it can apply its knowledge to identify the fruits from the basket. In all likelihood, it would also be able to correctly identify most of the fruits.
 
-This type of problem, where we teach a computer to classify objects based on labeled data, is commonly known as a Classification Problem. The learning model is given a set of observations with pre-assigned labels, and its task is to classify new, unseen observations based on what it has learned.
+This type of problem, where we teach a computer to classify objects based on labeled data, is commonly known as a **Classification Problem**. The learning model is given a set of observations with pre-assigned labels, and its task is to classify new, unseen observations based on what it has learned.
 
-
-Regression Problem
-----------------------
+# Regression Problem
 
 Let's consider another example. Imagine you own a bicycle rental shop and you want to make an estimate of how many bicycles you will be able to rent on a given day. Since you have experience in this business, you can make an educated guess based on factors like the day of the week, current weather conditions, temperature, humidity, the season, and whether it's a holiday or not. These factors help you form a rough estimate, right?
 
 Now, let's say I provide a computer with quantified data, including the number of bikes rented for each day over the past two years, along with various factors such as the day of the week, weather conditions, temperature, humidity, season, and holidays. I ask the computer to predict the number of bikes your shop will be able to rent for each of the next seven days. Will the computer be able to make these predictions? Certainly, there's a good chance it can.
 
-This type of problem, where the goal is to predict a real number value based on learning from labeled data, is known as a Regression Problem. In this case, you provide the learning model with a set of observations that include the corresponding output values, and then ask it to predict the output for new, unseen observations.
+This type of problem, where the goal is to predict a real number value based on learning from labeled data, is known as a **Regression Problem**. In this case, you provide the learning model with a set of observations that include the corresponding output values, and then ask it to predict the output for new, unseen observations.
 
-Supervised Learning
-----------------------
+# Supervised Learning
 
-These types of problems, namely Classification and Regression, are typically tackled using Supervised Learning models.
+These types of problems, namely Classification and Regression, are typically tackled using **Supervised Learning** models.
 
 In supervised learning, an algorithm is provided with a set of observations that have known desired outputs (known as the training set). The algorithm's task is to learn from this data and create a generalized model that can predict the desired output for any new, unseen observation, whether or not it was part of the training set.
 
@@ -38,8 +34,9 @@ The main distinction between a regression problem and a classification problem l
 
 To illustrate this, refer to the image below:
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*GZ85Pfb2-PRKaLYFjGHUvA.png)
-Image source: [http://ipython-books.github.io](http://ipython-books.github.io)
+![Classification and Regression](https://miro.medium.com/v2/resize:fit:1400/1*GZ85Pfb2-PRKaLYFjGHUvA.png)
+
+*Image source: [http://ipython-books.github.io](http://ipython-books.github.io)*
 
 Classification problems can be further categorized into two main types:
 
@@ -50,5 +47,6 @@ There is also another common type of classification problem known as [Multi-Labe
 
 To understand the distinction between binary and multiclass classification, refer to the image below:
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*ocZWgUk2pPHiB6FB2q_5WA.png)
-Image source: Coursera
+![Binary and Multiclass Classification](https://miro.medium.com/v2/resize:fit:1400/1*ocZWgUk2pPHiB6FB2q_5WA.png)
+
+*Image source: Coursera*

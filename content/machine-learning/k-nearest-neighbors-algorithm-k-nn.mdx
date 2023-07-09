@@ -6,33 +6,30 @@ summary: 'k-nearest neighbors algorithm (k-NN) - You are the average of the five
 
 > You are the average of the five people you most associate with
 
-Say, you are a teacher in a very famous school and a new student applies to your school. Since you like predicting stuffs, you want to predict if the applicant will be selected or not. Before the admission process, the school collects a set of attributes about the applicant based on some basic evaluations and also on previous academic and other details. Now since you have been on the admission panel for long, you already have a rough idea about the students that were selected and those who were rejected, you can judge the applicant based on his/her attributes.
+Imagine you are a teacher at a prestigious school, and a new student applies for admission. As someone who enjoys making predictions, you want to determine whether the applicant will be selected. Before the admission process, the school collects various attributes about each applicant through evaluations and their academic and personal history. Drawing from your experience on the admission panel, you can assess the applicant based on these attributes.
 
-One way to do so is by comparing him with all the applicants and then finding the 5 applicants who seem most similar to him based on the attributes. Suppose, 4 out of the 5 were selected and 1 was not. Intuitively, you can say that the new student will be selected. Even if 3 out of 5 are selected, you can assume that he can be selected. So what we are actually doing is taking the [mode](https://en.wikipedia.org/wiki/Mode_(statistics)) of the selection label in the 5 closest applicants and classifying the applicant in it. This algorithm is known as **k-nearest neighbour classification**. The value of k is 5 in our example.
+One approach is to compare the applicant with all other applicants and identify the five most similar individuals based on their attributes. Let's assume that out of these five applicants, four were selected and one was not. Intuitively, you can predict that the new student will be selected. Even if three out of five were selected, you can still assume a high chance of selection. So, what we are actually doing is taking the [mode](https://en.wikipedia.org/wiki/Mode_(statistics)) of the selection label among the 5 closest applicants and classifying the applicant accordingly. This algorithm is known as **k-nearest neighbor classification**, with a value of k set to 5 in this example.
 
-Now say, you want to predict how much that applicant will score in the selection test. One thing you can do is to find the top 5 applicants most similar to him as in previous example and then compute the mean of the scores of these applicants and predicting it as the score of the applicant. This algorithm is known as **k-nearest neighbour regression**. The value of k is 5 in our example.
+Now, let's consider predicting the applicant's score on the selection test. One possible approach is to find the top five applicants who are most similar to the target applicant, as we did in the previous example, and compute the average score of these applicants. This algorithm is called **k-nearest neighbor regression**, with a value of k set to 5 in this case.
 
-These algorithms are generically known as the **k-nearest neighbors algorithm.** It is one of the simplest machine learning algorithms.
+Both of these algorithms fall under the category of **k-nearest neighbors** (k-NN) algorithm, which is one of the simplest machine learning methods.
 
-The similarity between two observations is computed by finding the distance between them using some distance metric (Generally [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance)).
+To determine the similarity between two observations, we compute the distance between them using a distance metric such as the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance).
 
-![](https://miro.medium.com/v2/resize:fit:988/1*AsY9lVJwcnL0OaWp-b5DdQ.jpeg)
+![Euclidean Distance](https://miro.medium.com/v2/resize:fit:988/1*AsY9lVJwcnL0OaWp-b5DdQ.jpeg)
+Image Source: Imgur
 
-Eucledian Distance (Source: Imgur)  
-Here, pi is the value of the ith feature in the 1st observation  
-qi is the value of the ith feature in the 2nd observation
+Here, *p<sub>i</sub>* represents the value of the *i*-th feature in the first observation, and *q<sub>i</sub>* represents the value of the *i*-th feature in the second observation.
 
-When k=1, the algorithm is known as **nearest neighbour algorithm** and the label of the nearest neighbor is assigned to the observation.
+When k=1, the algorithm is known as the **nearest neighbor algorithm**, and the label of the nearest neighbor is assigned to the observation.
 
-The value of _k_ should not be taken too high or too low and should depend on the data. If we keep the value of _k_ too high, then the model won’t be generalized and will return the same value in most of the cases. Say, k=n where _n_ is the number of samples in training set. In this case, all the predictions will be equal to the mode of the training set. In case of small _k_, the model will not be able to filter out outliers.
+It is crucial to select an appropriate value for *k* that neither too high nor too low, depending on the data. If *k* is too high, the model will not generalize well and will predict the same value in most cases. For example, setting *k=n* (the number of samples in the training set) will result in all predictions being equal to the mode of the training set. On the other hand, if *k* is too small, the model may fail to filter out outliers effectively.
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*rmdr7RsUPOWranwOuuIl7w.png)
+![k-NN Classifier](https://miro.medium.com/v2/resize:fit:1400/1*rmdr7RsUPOWranwOuuIl7w.png)
+Image Source: [en.proft.com.ua](http://en.proft.com.ua/media/science/r_knn_concept.png)
 
-k-NN classifier (Source: [en.proft.com.ua](http://en.proft.com.ua/media/science/r_knn_concept.png))
+One drawback of using k-NN is that, for example, when *k*=7 and the three nearest neighbors are labeled 'x' while the next four are labeled 'y', the algorithm will predict 'y' even though intuitively, it should have been 'x'. This issue can be addressed by assigning more weight to the nearest neighbors and reducing the weight as we move farther away.
 
-One drawback of using k-NN is that say if k=7 and first 3 of the nearest neighbors are labelled ‘x’ and the next 4 are labelled ‘y’. Our algorithm will predict ‘y’ even when intuitively, it should have been ‘x’. This issue can be tackled by assigning more weight to the nearest ones and reducing the weight as we go far.
+Similarly, when the dataset is skewed, the mode will often belong to the majority class even if it is distant from the target. To mitigate this, we can use weights based on the inverse of the distance.
 
-The above problem also happens when the dataset is skewed and the mode will generally belong to the skewed class even if they’re very distant. This can also be solved using weights based on inverse of distance.
-
-k-NN classifier is available in scikit-learn as [**KNeighborsClassifier**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) in **sklearn.neighbors.  
-**k-NN regressor is available in scikit-learn as [**KNeighborsRegressor**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) in **sklearn.neighbors.**
+The k-NN classifier is available in scikit-learn as the [**KNeighborsClassifier**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html) in the `sklearn.neighbors` module, while the k-NN regressor is available as [**KNeighborsRegressor**](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) in the same module.

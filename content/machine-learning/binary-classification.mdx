@@ -6,30 +6,26 @@ summary: 'Binary Classification - To be, or not to be: that is the question'
 
 > To be, or not to be: that is the question
 
-Introduction
-------------
+# Introduction
 
 Binary Classification is the task of classifying elements into one of two classes/groups. Some examples include determining if a person has a particular disease, classifying email as spam or not spam, and detecting credit card fraud.
 It is a form of [supervised learning](/blog/machine-learning/supervised-learning) where a model is trained based on a set of observations, and then used to classify new observations into categories.
 
-Methods
--------
+# Methods
 
 Some commonly used methods for binary classification are:
 
-*   [k-Nearest Neighbour](/blog/machine-learning/k-nearest-neighbors-algorithm-k-nn)
-*   [Naive Bayes](/blog/machine-learning/naive-bayes-classifier)
-*   [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression)
-*   [Decision Trees](https://en.wikipedia.org/wiki/Decision_tree_learning)
-*   [Random Forests](https://en.wikipedia.org/wiki/Random_forests)
-*   [SVMs](https://en.wikipedia.org/wiki/Support_vector_machine)
-*   [Neural Networks](https://en.wikipedia.org/wiki/Neural_network)
+- [k-Nearest Neighbour](/blog/machine-learning/k-nearest-neighbors-algorithm-k-nn)
+- [Naive Bayes](/blog/machine-learning/naive-bayes-classifier)
+- [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression)
+- [Decision Trees](https://en.wikipedia.org/wiki/Decision_tree_learning)
+- [Random Forests](https://en.wikipedia.org/wiki/Random_forests)
+- [SVMs](https://en.wikipedia.org/wiki/Support_vector_machine)
+- [Neural Networks](https://en.wikipedia.org/wiki/Neural_network)
 
+The choice of method depends on the problem and available data. According to the [No Free Lunch Theorem](https://en.wikipedia.org/wiki/No_free_lunch_theorem), any two optimization algorithms are equivalent when their performance is averaged across all possible problems. It is [recommended](https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms/answer/Xavier-Amatriain) to start with simpler methods and consider more complex ones if needed.
 
-The choice of method depends on the problem and available data. [Any two optimization algorithms are equivalent when their performance is averaged across all possible problems. There is no free lunch.](https://en.wikipedia.org/wiki/No_free_lunch_theorem). It is [recommended](https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms/answer/Xavier-Amatriain) to start with simpler methods and consider more complex ones if needed.
-
-Evaluation
-----------
+# Evaluation
 
 The most common evaluation metric for binary classification is accuracy. It is defined as:
 
@@ -41,55 +37,55 @@ However, accuracy may not always be the best metric for every use case. For exam
 
 Let's consider a scenario where our observations consist of both positive (P) and negative (N) samples. The model provides two types of predictions: predicted positive (P') and predicted negative (N'). By analyzing these predictions, we can construct a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) as shown below:
 
-Confusion Matrix:
-![](https://miro.medium.com/v2/resize:fit:1398/0*DwxQAGmL35CcoPSc.png)
-(Source: MathWorks)
+![Confusion Matrix](https://miro.medium.com/v2/resize:fit:1398/0*DwxQAGmL35CcoPSc.png) (Source: MathWorks)
 
 In the confusion matrix, we have the following categories:
-*   [True Positive (TP)](https://en.wikipedia.org/wiki/True_positive) : Positive samples correctly predicted as positive.
-*   [True Negative (TN)](https://en.wikipedia.org/wiki/True_negative) : Negative samples correctly predicted as negative.
-*   [False Positive (FP)](https://en.wikipedia.org/wiki/False_positive) : Negative samples incorrectly predicted as positive.
-*   [False Negative (FN)](https://en.wikipedia.org/wiki/False_negative) : Positive samples incorrectly predicted as negative.
+
+- [True Positive (TP)](https://en.wikipedia.org/wiki/True_positive): Positive samples correctly predicted as positive.
+- [True Negative (TN)](https://en.wikipedia.org/wiki/True_negative): Negative samples correctly predicted as negative.
+- [False Positive (FP)](https://en.wikipedia.org/wiki/False_positive): Negative samples incorrectly predicted as positive.
+- [False Negative (FN)](https://en.wikipedia.org/wiki/False_negative): Positive samples incorrectly predicted as negative.
 
 From the confusion matrix, we can observe the following relationships:
-* P + N = Total number of observations.
-* TP + TN = Number of true (correct) predictions.
-* FP + FN = Number of false (incorrect) predictions.
-* TP + FN = Total number of positive samples (P).
-* TN + FP = Total number of negative samples (N).
-* TP + FP = Total number of predicted positive samples (P').
-* TN + FN = Total number of predicted negative samples (N').
 
-Therefore, [Accuracy (ACC)](https://en.wikipedia.org/wiki/Accuracy) \= (TP + TN)/(P + N)
+- P + N = Total number of observations.
+- TP + TN = Number of true (correct) predictions.
+- FP + FN = Number of false (incorrect) predictions.
+- TP + FN = Total number of positive samples (P).
+- TN + FP = Total number of negative samples (N).
+- TP + FP = Total number of predicted positive samples (P').
+- TN + FN = Total number of predicted negative samples (N').
+
+Therefore, [Accuracy (ACC)](https://en.wikipedia.org/wiki/Accuracy) = (TP + TN)/(P + N)
 
 We can derive 8 more useful metrics based on TP, FP, TN, FN. These are:
 
-*   [Recall/Sensitivity/Hit Rate/True Positive Rate (TPR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TP/P
-*   [Miss Rate/False Negative Rate (FNR)](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors#False_positive_and_false_negative_rates) = FN/P
-*   [Specificity (SPC)/True Negative Rate (TNR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TN/N
-*   [Fall-out/False Positive Rate (FPR)](https://en.wikipedia.org/wiki/False_positive_rate) = FP/N
-*   [Precision/Positive predictive value (PPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TP/P’
-*   [False Discovery Rate (FDR)](https://en.wikipedia.org/wiki/False_discovery_rate) = FP/P’
-*   [Negative predictive value (NPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TN/N’
-*   [False Omission Rate (FOR)](https://en.wikipedia.org/wiki/False_omission_rate) = FN/N’
+- [Recall/Sensitivity/Hit Rate/True Positive Rate (TPR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TP/P
+- [Miss Rate/False Negative Rate (FNR)](https://en.wikipedia.org/wiki/Type_I_and_type_II_errors#False_positive_and_false_negative_rates) = FN/P
+- [Specificity (SPC)/True Negative Rate (TNR)](https://en.wikipedia.org/wiki/Sensitivity_and_specificity) = TN/N
+- [Fall-out/False Positive Rate (FPR)](https://en.wikipedia.org/wiki/False_positive_rate) = FP/N
+- [Precision/Positive predictive value (PPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TP/P'
+- [False Discovery Rate (FDR)](https://en.wikipedia.org/wiki/False_discovery_rate) = FP/P'
+- [Negative predictive value (NPV)](https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values) = TN/N'
+- [False Omission Rate (FOR)](https://en.wikipedia.org/wiki/False_omission_rate) = FN/N'
 
 Further Derivations:
 
-*   [Positive Likelihood ratio (LR+)](https://en.wikipedia.org/wiki/Positive_likelihood_ratio) = TPR/FPR
-*   [Negative Likelihood ratio (LR-)](https://en.wikipedia.org/wiki/Negative_likelihood_ratio) = FNR/TNR
+- [Positive Likelihood ratio (LR+)](https://en.wikipedia.org/wiki/Positive_likelihood_ratio) = TPR/FPR
+- [Negative Likelihood ratio (LR-)](https://en.wikipedia.org/wiki/Negative_likelihood_ratio) = FNR/TNR
 
 ```
 Sample Values:
 
-Actual  Predicted
-1       1
-0       0
-0       1
-1       0
-1       1
-0       0
-0       0
-1       0
+Actual Predicted
+1 1
+0 0
+0 1
+1 0
+1 1
+0 0
+0 0
+1 0
 
 Metrics:
 
@@ -108,18 +104,18 @@ TP + TN = 5
 FP + FN = 3
 TP + FN = P = 4
 TN + FP = N = 4
-TP + FP = P’ = 3
-TN + FN = N’ = 5
+TP + FP = P' = 3
+TN + FN = N' = 5
 ACC = (TP + TN)/(P + N) = 5/8 = 0.625
 
 Recall/TPR = TP/P = 2/4 = 0.5
 FNR = FN/P = 2/4 = 0.5
 TNR = TN/N = 3/4 = 0.75
 FPR = FP/N = 1/4 = 0.25
-Precision/PPV = TP/P’ = 2/3 = 0.67
-FDR = FP/P’ = 1/3 = 0.33
-NPV = TN/N’ = 3/5 = 0.6
-FOR = FN/N’ = 2/5 = 0.4
+Precision/PPV = TP/P' = 2/3 = 0.67
+FDR = FP/P' = 1/3 = 0.33
+NPV = TN/N' = 3/5 = 0.6
+FOR = FN/N' = 2/5 = 0.4
 
 LR+ = TPR/FPR = 0.5/0.25 = 2
 LR- = FNR/TNR = 0.5/0.75 = 0.67
@@ -127,8 +123,8 @@ LR- = FNR/TNR = 0.5/0.75 = 0.67
 
 Another commonly used evaluation metric is [AUC (Area under the curve)/ROC (Receiver operating characteristic) curve score](https://en.wikipedia.org/wiki/Receiver_operating_characteristic).
 
-![](https://miro.medium.com/v2/resize:fit:1000/1*B7DxPNemgpKQowZ1Ztci8w.png)
+![ROC Curve](https://miro.medium.com/v2/resize:fit:1000/1*B7DxPNemgpKQowZ1Ztci8w.png)
 
 ROC Curve (Source:Wikipedia)
 
-A ROC space is defined by FPR and TPR as _x_ and _y_ axes, respectively, which depicts relative trade-offs between true positive (benefits) and false positive (costs). The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. AUC is the area under the ROC Curve. A higher AUC score signifies a better model.
+A ROC space is defined by FPR and TPR as *x* and *y* axes, respectively, which depicts relative trade-offs between true positive (benefits) and false positive (costs). The ROC curve is created by plotting the true positive rate (TPR) against the false positive rate (FPR) at various threshold settings. AUC is the area under the ROC Curve. A higher AUC score signifies a better model.

@@ -6,96 +6,102 @@ summary: 'Naive Bayes Classifier - Smokers are less likely to die of age related
 
 > Smokers are less likely to die of age related sickness
 
-Let’s get back to the example from our [Supervised Learning introduction](/blog/machine-learning/supervised-learning) where given a basket of fruits, we had to identify each fruit. Say, for the learning process, I take you to an orchard and give you details about all the fruits in the orchard and in the form of a table with each row containing the following attributes:
+In this article, we will revisit the example from our [Supervised Learning introduction](/blog/machine-learning/supervised-learning) where we needed to identify different fruits in a basket. Imagine being in an orchard, where you gather information about the fruits available. The information is presented in a table with the following attributes for each fruit:
 
-*   the name of the fruit,
-*   if it is yellow or not,
-*   if it is long or not, and,
-*   if it is sweet or not.
+- Name of the fruit
+- Whether it is yellow or not
+- Whether it is long or not
+- Whether it is sweet or not
+
+Here is a sample table showing the details about the fruits in the orchard:
+
+Fruit | Yellow | Long | Sweet
+--- | --- | --- | ---
+Mango | true | false | true
+Apple | false | false | false
+Mango | false | false | true
+Banana | true | true | false
+...
+Total | 1000 rows
+
+Now, given a fruit from the basket, your task is to determine if it is a mango, banana, or something else.
+
+The core concept behind the Naive Bayes Classifier is that the attributes are considered to be conditionally independent. Even though it may not seem very practical, but being a simple algorithm this assumption is very effective.
+
+To identify a fruit from the basket, let's say you pick up a fruit and observe that it is yellow, long, and not sweet. How can you utilize the provided table to determine the type of fruit? One way is to compute the probability of the fruit being a yellow, long and not sweet `X` (mango/banana/others) using [Bayes’ Theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) as:
 
 ```
-Fruit     Yellow     Long   Sweet
-_________________________________
-Mango      true      false  true
-Apple      false     false  false
-Mango      false     false  true
-Banana     true      true   false
-.
-.
-.
-.
-.
-Total 1000 rows
+P(X, Y, L, S’) = P(Y, L, S’, X) = P(Y|L, S’, X) * P(L|S’, X) * P(S’|X) * P(X)
 ```
-
-Sample data for the details about the fruits in the orchard
-
-Now given that for each fruit in the basket, you have to identify if it is mango, banana or something else.
-
-The core of Naive Bayes Classifier is that the attributes are considered to be conditionally independent. Even though it may not seem very practical, but being a simple algorithm this assumption is very effective.
-
-So let’s say, when you try to identify a fruit from the basket, you pick up a fruit and note that it is yellow, long and not sweet. Now how can you use the given table to identify this fruit?? What if you can somehow compute the probabilities of the fruit being mango/banana/others using the data. You can actually compute the probability of the fruit being a yellow, long and not sweet X(mango/banana/others) using [Bayes’ Theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem) as:
-
-P(X, Y, L, S’) = P(Y, L, S’, X) = P(Y|L, S’, X) \* P(L|S’, X) \* P(S’|X) \* P(X)
 
 Here, P(Y|L, S’, X) means probability of color being yellow given that the fruit is long, not sweet and is X. P(L|S’, X), P(S’|X) have similar meanings.
 
-But since we are trying to use Naive Bayes Classifier, we’ll assume that all attributes are conditionally independent, so we can write the above as:
+In the Naive Bayes Classifier, we assume that all attributes are conditionally independent, allowing us to simplify the equation as:
 
-P(X, Y, L, S’) = P(Y|X) \* P(L|X) \* P(S’|X) \* P(X)
+```
+P(X, Y, L, S’) = P(Y|X) * P(L|X) * P(S’|X) * P(X)
+```
 
 Here,
 
-*   P(X) = the probability of the fruit being X,
-*   P(Y|X) = the probability of the color being yellow given it is fruit X,
-*   P(L|X) = the probability of the length being long given it is fruit X,
-*   P(S’|X) = the probability of the sweetness type being (sweet)’ given it is fruit X
+- `P(X)`: Probability of the fruit being X
+- `P(Y|X)`: Probability of the color being yellow given the fruit is X
+- `P(L|X)`: Probability of the length being long given the fruit is X
+- `P(S'|X)`: Probability of the sweetness type being (not sweet) given the fruit is X
 
 The difference between both the equations is that we are assuming that P(Y|L, S’, X) = P(Y|X) since all attributes are independent. We are doing the same for other components in the equation.
 
-Based on the details provided by me, you can create an aggregated table from the list with counts of each attributes for mango, banana and others as:
+Based on the details provided, we can create an aggregated table that counts the occurrences of each attribute for mangoes, bananas, and other fruits:
+
+Fruit | Yellow | Long | Sweet | Total Pieces
+--- | --- | --- | --- | ---
+Mango | 200 | 0 | 250 | 300
+Banana | 350 | 350 | 200 | 400
+Others | 150 | 100 | 150 | 300
+Total | 700 | 450 | 600 | 1000
+
+In this table, the value at (Mango, Yellow) represents the number of yellow mangoes, and the value at (Mango, Total Pieces) represents the total number of mangoes. We can similarly interpret the other cells.
+
+From this table, we can create a likelihood table, which represents the likelihood of an event occurring:
+
+Fruit | Yellow | Long | Sweet | Total Pieces
+--- | --- | --- | --- | ---
+Mango | 200/300 | 0/300 | 250/300 | 300/1000
+Banana | 350/400 | 350/400 | 200/400 | 400/1000
+Others | 150/300 | 100/300 | 150/300 | 300/1000
+Total | 700/1000 | 450/1000 | 600/1000 | 1000/1000
+
+
+In this likelihood table, the value at (Mango, Yellow) represents the probability of the color being yellow given that the fruit is a mango (P(Y|M)), and the value at (Mango, Total Pieces) represents the probability of the fruit being a mango (P(M)). The other cells have similar interpretations.
+
+Now, we have all the required probabilities to compute P(X, Y, L, S').
+
+For example, let's calculate the probability of the fruit being a mango, given that it is yellow, long, and not sweet:
+
 ```
-Fruit   Yellow    Long    Sweet   Total Pieces
-_______________________________________________
-Mango     200       0       250       300
-Banana    350      350      200       400
-Others    150      100      150       300
-_______________________________________________
-Total     700      450      600       1000
+P(M, Y, L, S’) = 200/300 * 0/300 * 250/300 * 300/1000 = 0
 ```
-Here, Value at (Mango, Yellow) represents no. of yellow mangoes. Value at (Mango, Total Pieces) represents total no. of mangoes.
 
-Now from this table, you can create a likelihood table (A table which represents the likelihood of an event happening) like this:
+Similarly, we can calculate the probabilities for a banana and others:
 ```
-Fruit     Yellow        Long         Sweet     Total Pieces
-_____________________________________________________________
-Mango     200/300       0/300       250/300       300/1000
-Banana    350/400      350/400      200/400       400/1000
-Others    150/300      100/300      150/300       300/1000
-_____________________________________________________________
-Total       700          450          600           1000
+P(B, Y, L, S’) = 350/400 * 350/400 * 200/400 * 400/1000 = 0.153125  
+P(O, Y, L, S’) = 150/300 * 100/300 * 150/300 * 300/1000 = 0.025
 ```
-Here, value at (Mango, Yellow) represents P(Y|M), i.e., Probability of the color being yellow given that the fruit is mango.  
-Value at (Mango, Total Pieces) represent P(M), i.e., Probability of the fruit being mango. Other cells represent similarly.
 
-Now, you’ve all the required probabilities for computing P(X, Y, L, S’).
+Therefore, the individual probabilities of the fruit being a mango, banana, or others, given that it is yellow, long, and not sweet, are:
 
-P(M, Y, L, S’) = 200/300 \* 0/300 \* 250/300 \* 300/1000 = 0  
-P(B, Y, L, S’) = 350/400 \* 350/400 \* 200/400 \* 400/1000 = 0.153125  
-P(O, Y, L, S’) = 150/300 \* 100/300 \* 150/300 \* 300/1000 = 0.025
-
-Therefore, their individual probabilities given that fruit is yellow, long and not sweet are:
-
+```
 P(M | Y, L, S’) = 0/(0+0.153125+0.025) = 0  
 P(B | Y, L, S’) = 0.153125/(0+0.153125+0.025) = 0.86  
 P(O | Y, L, S’) = 0.025/(0+0.153125+0.025) = 0.14
+```
 
-Given, that the probability of it being a banana is the highest, you can say that the fruit is a banana. You can do the same for all the fruits in the basket and identify most of them correctly with a very high accuracy.
 
-One drawback of using Naive Bayes Classifier is that it makes the assumption that the attributes are conditionally independent which is not always true.
+Since the probability of it being a banana is the highest, we can conclude that the fruit is a banana. This approach can be applied to all the fruits in the basket, resulting in accurate identification with high precision.
 
-Naive Bayes classifier is available in scikit-learn as [**GaussianNB**](http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html), [**MultinomialNB**](http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html), [**BernoulliNB**](http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html) in **sklearn.naive\_bayes.**
+One drawback of using the Naive Bayes Classifier is the assumption of attribute independence, which may not always hold true.
 
-![](https://miro.medium.com/v2/resize:fit:1400/1*uMmG4OdWE5Vi5p3UAkOeFw.jpeg)
+The Naive Bayes classifier is available in scikit-learn as **GaussianNB**, **MultinomialNB**, and **BernoulliNB** in the **sklearn.naive_bayes** module.
 
-Bayes’ Theorem (Source: [wikipedia](https://en.wikipedia.org/wiki/Bayes%27_theorem#/media/File:Bayes%27_Theorem_MMB_01.jpg))
+![Bayes’ Theorem](https://miro.medium.com/v2/resize:fit:1400/1*uMmG4OdWE5Vi5p3UAkOeFw.jpeg)
+*Image Source: [wikipedia](https://en.wikipedia.org/wiki/Bayes%27_theorem#/media/File:Bayes%27_Theorem_MMB_01.jpg)*
