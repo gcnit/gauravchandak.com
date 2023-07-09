@@ -9,22 +9,13 @@ summary: 'Binary Classification - To be, or not to be: that is the question'
 Introduction
 ------------
 
-Binary Classification as the name suggests is the task of classifying elements into one of two classes/groups. Some applications of binary classification are:
-
-*   Testing if a person has a particular disease or not
-*   Classifying email as spam or not spam
-*   Credit card fraud detection, etc.
-
-It is a form of [supervised learning](/blog/machine-learning/supervised-learning) where
-
-*   Given a set of observations
-*   A model needs to be trained based on those observations
-*   Post which the model should be able to classify new observations into one of the categories.
+Binary Classification is the task of classifying elements into one of two classes/groups. Some examples include determining if a person has a particular disease, classifying email as spam or not spam, and detecting credit card fraud.
+It is a form of [supervised learning](/blog/machine-learning/supervised-learning) where a model is trained based on a set of observations, and then used to classify new observations into categories.
 
 Methods
 -------
 
-Some of the most commonly used methods for binary classification are:
+Some commonly used methods for binary classification are:
 
 *   [k-Nearest Neighbour](/blog/machine-learning/k-nearest-neighbors-algorithm-k-nn)
 *   [Naive Bayes](/blog/machine-learning/naive-bayes-classifier)
@@ -34,39 +25,40 @@ Some of the most commonly used methods for binary classification are:
 *   [SVMs](https://en.wikipedia.org/wiki/Support_vector_machine)
 *   [Neural Networks](https://en.wikipedia.org/wiki/Neural_network)
 
-None of these are better than the other and it totally depends on the problem/use case and the available data. [Any two optimization algorithms are equivalent when their performance is averaged across all possible problems. There is no free lunch.](https://en.wikipedia.org/wiki/No_free_lunch_theorem) Though it is [recommended](https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms/answer/Xavier-Amatriain) that we should start with something simple and make it more complicated if and only if necessary.
+
+The choice of method depends on the problem and available data. [Any two optimization algorithms are equivalent when their performance is averaged across all possible problems. There is no free lunch.](https://en.wikipedia.org/wiki/No_free_lunch_theorem). It is [recommended](https://www.quora.com/What-are-the-advantages-of-different-classification-algorithms/answer/Xavier-Amatriain) to start with simpler methods and consider more complex ones if needed.
 
 Evaluation
 ----------
 
-The simplest and most common evaluation metric for binary classification problem is accuracy.
+The most common evaluation metric for binary classification is accuracy. It is defined as:
 
 ```
 Accuracy = (# Correct Predictions)/(# Observations)
 ```
 
-Though it seems to be a very good metric for evaluation but it may not be desirable for every use case. Say, we are trying to detect if a person has cancer or not. Say, we try to classify 1000 people with having cancer or not and we are able to get 95% accuracy. Though it may seem like a very good model but here is the catch. If most of the samples are negative (no cancer) and the model predicts them as negative, the accuracy will be high even if some of the positive samples are predicted as negative. This is undesirable since we would not want to tell a person with cancer that he does not have cancer but we can ask a person with no cancer to undergo some tests, if required. So, we would want to prefer a model which tries not to predict positive cases as negative, i.e., has a higher recall.
+However, accuracy may not always be the best metric for every use case. For example, in the case of cancer detection, if most samples are negative (no cancer), a model that predicts all samples as negative would still achieve high accuracy. However, this is undesirable because we don't want to mistakenly tell a person with cancer that they don't have the disease. Instead, we can request further tests for individuals without cancer, if necessary. Therefore, we would want a model that minimizes the prediction of positive cases as negative, i.e., has a higher recall.
 
-Let’s say that the observations have both **positive (P)** and **negative (N)** samples. The model gives two types of predictions: **predicted positive (P’)** and **predicted negative (N’)**. Based on the predictions, we can create a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix):
+Let's consider a scenario where our observations consist of both positive (P) and negative (N) samples. The model provides two types of predictions: predicted positive (P') and predicted negative (N'). By analyzing these predictions, we can construct a [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) as shown below:
 
+Confusion Matrix:
 ![](https://miro.medium.com/v2/resize:fit:1398/0*DwxQAGmL35CcoPSc.png)
+(Source: MathWorks)
 
-Confusion Matrix (Source:MathWorks)
+In the confusion matrix, we have the following categories:
+*   [True Positive (TP)](https://en.wikipedia.org/wiki/True_positive) : Positive samples correctly predicted as positive.
+*   [True Negative (TN)](https://en.wikipedia.org/wiki/True_negative) : Negative samples correctly predicted as negative.
+*   [False Positive (FP)](https://en.wikipedia.org/wiki/False_positive) : Negative samples incorrectly predicted as positive.
+*   [False Negative (FN)](https://en.wikipedia.org/wiki/False_negative) : Positive samples incorrectly predicted as negative.
 
-*   [True Positive (TP)](https://en.wikipedia.org/wiki/True_positive) : Positive and Predicted Positive
-*   [True Negative (TN)](https://en.wikipedia.org/wiki/True_negative) : Negative and Predicted Negative
-*   [False Positive (FP)](https://en.wikipedia.org/wiki/False_positive) : Negative and Predicted Positive
-*   [False Negative (FN)](https://en.wikipedia.org/wiki/False_negative) : Positive and Predicted Negative
-
-It can be seen that:
-
-*   P + N = # Observations
-*   TP + TN = True (Correct) Predictions
-*   FP + FN = False (Incorrect) Predictions
-*   TP + FN = P
-*   TN + FP = N
-*   TP + FP = P’
-*   TN + FN = N’
+From the confusion matrix, we can observe the following relationships:
+* P + N = Total number of observations.
+* TP + TN = Number of true (correct) predictions.
+* FP + FN = Number of false (incorrect) predictions.
+* TP + FN = Total number of positive samples (P).
+* TN + FP = Total number of negative samples (N).
+* TP + FP = Total number of predicted positive samples (P').
+* TN + FN = Total number of predicted negative samples (N').
 
 Therefore, [Accuracy (ACC)](https://en.wikipedia.org/wiki/Accuracy) \= (TP + TN)/(P + N)
 

@@ -9,45 +9,46 @@ summary: 'Supervised Learning - To predict the future, look to the past'
 Classification Problem
 ----------------------
 
-Say, you are given a basket with a lot of different kinds of fruits and you know nothing about fruits. What if I pick up a fruit and ask you which fruit it is? Will you be able to answer it?  
-Definitely not (Without [Google Image Search](https://images.google.com/imghp), of course).
+Imagine this scenario: You are handed a basket filled with various types of fruits, but you have absolutely no knowledge about fruits. If I were to randomly select a fruit from the basket and ask you to identify it, would you be able to give me the correct answer? Most likely not, unless you resort to using Google Image Search.
 
-Now say, I take you to an orchard and show you a lot of different kinds of fruits and tell you their names. Now will you be able to identify all of the fruits from the basket? I’m sure you’re a fast learner and will be able to identify most of them with good accuracy. Not only because you’re a fast learning but also because **you’ve learnt under my supervision.** 😉
+Now, let's consider a different situation. I take you to an orchard where you are shown a wide variety of fruits, and I provide you with the names of each fruit. After this exposure and with my guidance, you would probably become a fast learner and be able to identify most of the fruits from the basket with reasonable accuracy. Your learning ability, combined with the assistance I provide, would contribute to your success.
 
-What if I try to teach the same to a computer with access to some fancy algorithms? I definitely can’t show the orchard to the computer to make it understand so I give it a list of fruits from the orchard with some features (say color, shape, volume, texture, etc) and the name of the fruits, ask it to learn it through some algorithm and then identify fruits from the basket using whatever it has learnt. It’ll also be able to identify most of the fruits correctly.
+Now, let's shift gears and think about teaching a computer to perform the same task. Obviously, I can't physically take the computer to the orchard to help it understand. Instead, I would provide the computer with a list of fruits from the orchard, along with some specific features such as color, shape, volume, texture, and so on. I would then ask the computer to learn this information using sophisticated algorithms. Once the computer has learned, it can apply its knowledge to identify the fruits from the basket. In all likelihood, it would also be able to correctly identify most of the fruits.
 
-Now this type of problem where you need to **classify stuffs** after learning through some labelled data is known as **Classification Problem**. You give the learning model a list of observations with classified labels and ask it to classify unseen observations.
+This type of problem, where we teach a computer to classify objects based on labeled data, is commonly known as a Classification Problem. The learning model is given a set of observations with pre-assigned labels, and its task is to classify new, unseen observations based on what it has learned.
 
 
 Regression Problem
 ----------------------
 
-Let’s take another example, say you have a bicycle rental shop and you want to estimate how many bicycles will you be able to rent today. Since you are in this business, you’ll be able to guess a rough estimate based on the day of the week, the current weather, temperature, humidity, the season, whether it is a holiday or not, etc, right?
+Let's consider another example. Imagine you own a bicycle rental shop and you want to make an estimate of how many bicycles you will be able to rent on a given day. Since you have experience in this business, you can make an educated guess based on factors like the day of the week, current weather conditions, temperature, humidity, the season, and whether it's a holiday or not. These factors help you form a rough estimate, right?
 
-Now if I give the quantified data and the number of bikes rented for each day in the last 2 years to a computer and ask it to give me the number of bikes that your shop will be able to rent for each of the next 7 days. Will it be able to do so? Sure, why not?
+Now, let's say I provide a computer with quantified data, including the number of bikes rented for each day over the past two years, along with various factors such as the day of the week, weather conditions, temperature, humidity, season, and holidays. I ask the computer to predict the number of bikes your shop will be able to rent for each of the next seven days. Will the computer be able to make these predictions? Certainly, there's a good chance it can.
 
-Now this type of problem where you need to **predict a real numbered value** after learning through some labelled data is known as **Regression Problem**. You give the learning model a list of observations with the observed output and ask it to find the output for unseen observations.
+This type of problem, where the goal is to predict a real number value based on learning from labeled data, is known as a Regression Problem. In this case, you provide the learning model with a set of observations that include the corresponding output values, and then ask it to predict the output for new, unseen observations.
 
 Supervised Learning
 ----------------------
 
-These types of problems (**Classification and Regression**) are solved using **Supervised Learning** models.
+These types of problems, namely Classification and Regression, are typically tackled using Supervised Learning models.
 
-> In supervised learning, the algorithm is given **a list of observations with desired output (training set)** and is asked to learn and **create a generalized model** from it such that it can **predict the desired output for any unseen observation** that may or may not be from the training set.
+In supervised learning, an algorithm is provided with a set of observations that have known desired outputs (known as the training set). The algorithm's task is to learn from this data and create a generalized model that can predict the desired output for any new, unseen observation, whether or not it was part of the training set.
 
-The primary difference between a regression problem and a classification problem is that **in regression**, you need to predict a value from a set of **continuous values** which can be literally infinite whereas **in classification**, you need to predict a value from a set of **discrete finite values**.
+The main distinction between a regression problem and a classification problem lies in the nature of the predicted value. In regression, the goal is to predict a value from a range of continuous values, which can be practically infinite. On the other hand, in classification, the aim is to predict a value from a set of discrete and finite values.
+
+To illustrate this, refer to the image below:
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*GZ85Pfb2-PRKaLYFjGHUvA.png)
+Image source: [http://ipython-books.github.io](http://ipython-books.github.io)
 
-Classification vs Regression (Source: [http://ipython-books.github.io](http://ipython-books.github.io))
+Classification problems can be further categorized into two main types:
 
-There are basically two different types of classification problems namely:
+1. [Binary Classification](/blog/machine-learning/binary-classification): In this type, the goal is to classify an observation into one of two possible classes.
+2. [Multiclass Classification](https://en.wikipedia.org/wiki/Multiclass_classification) Here, the objective is to assign an observation to one of several possible classes (more than two).
 
-*   [Binary Classification](/blog/machine-learning/binary-classification) (Classify in one of the two possible classes)
-*   [Multiclass Classification](https://en.wikipedia.org/wiki/Multiclass_classification) (Classify in one of the many possible classes (>2))
+There is also another common type of classification problem known as [Multi-Label classification](https://en.wikipedia.org/wiki/Multi-label_classification). In this scenario, an observation needs to be classified into multiple classes from a finite set of classes.
 
-There is another widely encountered type of classification problem where you need to classify an observation into multiple classes from a set of finite classes. This is known as [Multi-Label classification](https://en.wikipedia.org/wiki/Multi-label_classification).
+To understand the distinction between binary and multiclass classification, refer to the image below:
 
 ![](https://miro.medium.com/v2/resize:fit:1400/1*ocZWgUk2pPHiB6FB2q_5WA.png)
-
-Binary vs Multi-class Classification (Source: Coursera)
+Image source: Coursera
